@@ -2,9 +2,12 @@ import React from "react";
 import { Col, Row, Container } from "reactstrap";
 import Banner from "../../staticElements/banner";
 import AboutBeans from "../../staticElements/aboutBeans";
+import CoffeeItems from "../../coffeeItems/coffeeItems";
+import { withRouter } from "react-router-dom";
 import "./coffee.css";
 
-const CoffeePage = () => {
+
+const CoffeePage = ({history}) => {
   return (
     <>
       <Banner />
@@ -38,17 +41,13 @@ const CoffeePage = () => {
           </Row>
 
           <Row>
-            <Col lg={{size:10, offset:1}}>
+            <Col lg={{ size: 10, offset: 1 }}>
               <div className="shop__wrapper">
-                <div className="shop__item">
-                  <img
-                    src="https://www.sciencenews.org/sites/default/files/main/articles/100315_coffee_opener_NEW_0.jpg"
-                    alt="coffee"
-                  />
-                  <div className="shop__item-title">Solimo Coffee Beans 2kg</div>
-                  <div className="shop__item-country">Brazil</div>
-                  <div className="shop__item-price">10.73$</div>
-                </div>
+                <CoffeeItems
+                  onItemSelected={name => {
+                    history.push(`/coffeepage/${name}`);
+                  }}
+                />
               </div>
             </Col>
           </Row>
@@ -58,4 +57,4 @@ const CoffeePage = () => {
   );
 };
 
-export default CoffeePage;
+export default withRouter(CoffeePage);

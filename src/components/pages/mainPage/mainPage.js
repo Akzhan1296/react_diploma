@@ -2,12 +2,13 @@ import React from "react";
 import { Col, Row, Container } from "reactstrap";
 import "./mainpage.css";
 import beansLogo from "./Beans_logo.svg";
-
+import { Link } from "react-router-dom";
 import Header from "../../header";
 import AboutUs from "../../staticElements/aboutUs";
 import BestItems from "../../bestsellers/best";
+import { withRouter } from "react-router-dom";
 
-const MainPage = () => {
+const MainPage = ({ history }) => {
   return (
     <>
       <div className="preview">
@@ -25,9 +26,9 @@ const MainPage = () => {
                 We makes every day full of energy and taste
               </div>
               <div className="preview__subtitle">Want to try our beans?</div>
-              <a href="#" className="preview__btn">
+              <Link to="/coffeepage" className="preview__btn">
                 More
-              </a>
+              </Link>
             </Col>
           </Row>
         </Container>
@@ -40,7 +41,11 @@ const MainPage = () => {
           <Row>
             <Col lg={{ size: 10, offset: 1 }}>
               <div className="best__wrapper">
-                <BestItems />
+                <BestItems
+                  onItemSelected={name => {
+                    history.push(`/coffeepage/${name}`);
+                  }}
+                />
               </div>
             </Col>
           </Row>
@@ -50,4 +55,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default withRouter(MainPage);
