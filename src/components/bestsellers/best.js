@@ -25,19 +25,17 @@ export default class BestItems extends Component {
       const { name, url, price } = item;
 
       return (
-        <>
-          <div
-            className="best__item"
-            key={index}
-            onClick={() => {
-              this.props.onItemSelected(name);
-            }}
-          >
-            <img src={url} alt="coffee" />
-            <div className="best__item-title">{name}</div>
-            <div className="best__item-price">{price}</div>
-          </div>
-        </>
+        <div
+          className="best__item"
+          key ={index}
+          onClick={() => {
+            this.props.onItemSelected(name);
+          }}
+        >
+          <img src={url} alt="coffee" />
+          <div className="best__item-title">{name}</div>
+          <div className="best__item-price">{price}</div>
+        </div>
       );
     });
   }
