@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 const MainPage = ({ history }) => {
   return (
     <>
-      <div className="preview">
+      <div className="preview ">
         <Container>
           <Row>
             <Col lg="6">

@@ -35,7 +35,7 @@ export default class CoffeePage extends Component {
   filter = (arg) => {
     this.setState(({ arr }) => {
       let newArr = arr.filter(item => {
-        if (arg == item.country) {
+        if (arg === item.country) {
           return item;
         }
       });
