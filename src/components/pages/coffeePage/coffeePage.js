@@ -5,10 +5,8 @@ import AboutBeans from "../../staticElements/aboutBeans";
 import CoffeeItems from "../../coffeeItems/coffeeItems";
 import { withRouter } from "react-router-dom";
 import Service from "../../../services/service";
-
 import Spinner from "../../spinner";
 import ErrorMessage from "../../errorMessage";
-
 import "./coffee.css";
 
 export default class CoffeePage extends Component {
@@ -18,7 +16,7 @@ export default class CoffeePage extends Component {
     arr: [],
     arr2: [],
     loading: true,
-    error: false
+    error: false,
   };
 
   getInfo = () => {
@@ -34,7 +32,7 @@ export default class CoffeePage extends Component {
     this.getInfo();
   }
 
-  filter = arg => {
+  filter = (arg) => {
     this.setState(({ arr }) => {
       let newArr = arr.filter(item => {
         if (arg == item.country) {
@@ -46,6 +44,24 @@ export default class CoffeePage extends Component {
       };
     });
   };
+
+  onUpdateSearch= (e)=> {
+    const term = e.target.value;
+    this.setState({arr2: this.searchPost(this.state.arr, term)})
+    
+}
+
+  searchPost(items,term) {
+    if(term.length === 0) {
+        return items
+    }
+
+    return items.filter((item) => {
+      let a = item.name.toLowerCase();
+        term=term.toLowerCase();
+        return a.indexOf(term) > -1
+      })
+  }
 
   render() {
     const { loading, error } = this.state;
@@ -59,7 +75,6 @@ export default class CoffeePage extends Component {
     return (
       <>
         <Banner />
-
         <div className="shop">
           <Container>
             <AboutBeans />
@@ -74,6 +89,7 @@ export default class CoffeePage extends Component {
                     type="text"
                     placeholder="start typing here..."
                     className="shop__search-input"
+                    onChange = {this.onUpdateSearch}
                   />
                 </form>
               </Col>
@@ -109,7 +125,6 @@ export default class CoffeePage extends Component {
                 </div>
               </Col>
             </Row>
-
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>
                 <div className="shop__wrapper">
